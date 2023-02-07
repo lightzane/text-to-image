@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Image</title>
+</head>
+<body>
+    <p id="data"></p>
+    (Or see console)
+    <script>
+        const imageText = 'On The Wings of Love         💖Test'
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        writeText()
+        // ctx.rotate(0.1)
+       // ctx.fillText(imageText, 00, 100,text.width)
+        // Draw line under text
+        ctx.fillText(imageText, 20, 300)
+        var text = ctx.measureText(imageText)
+        canvas.width = text.width + 50 // re-adjusts the width
+
+        writeText()
+        ctx.strokeStyle = 'rgba(0,0,0,0.5)'
+        ctx.beginPath()
+        //ctx.lineTo(50, 102)
+        //ctx.lineTo(50 + text.width, 102)
+        ctx.stroke()
+        const image = canvas.toDataURL("image/png");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+        console.log(image)
+        document.getElementById('data').innerText = image
+
+        function writeText() {
+            ctx.font = '30px Vladimir Script'
+            // ctx.rotate(0.1)
+            ctx.fillText(imageText, 30, 100)
+        }
+    </script>
+</body>
+</html>

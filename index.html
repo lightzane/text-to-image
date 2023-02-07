@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Image</title>
+</head>
+<body>
+    <p>
+        <a href="sample.html">See another Example</a>
+    </p>
+    <script>
+        const imageText = 'This is a very very long message'
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+
+        document.body.append(canvas)
+        canvas.style.border = '1px solid hotpink'
+        
+        writeText()
+        
+        const text = ctx.measureText(imageText)
+        canvas.width = text.width + 50 // re-adjusts the width
+        
+	// rewrite after adjusting the canvas width
+        writeText()
+
+	// Draw line under text
+        ctx.strokeStyle = 'rgba(0,0,0,0.5)'
+        ctx.beginPath()
+        ctx.lineTo(30, 102)
+        ctx.lineTo(30 + text.width, 102)
+        ctx.stroke()
+
+        const base64image = canvas.toDataURL("image/png");
+        console.log(base64image)
+
+        function writeText() {
+            ctx.font = '24px Segoe UI'
+            // ctx.rotate(0.1)
+            ctx.fillText(imageText, 30, 100)
+        }
+    </script>
+</body>
+</html>
